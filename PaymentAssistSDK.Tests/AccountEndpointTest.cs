@@ -1,5 +1,6 @@
 using Xunit;
 using System;
+using System.Threading.Tasks;
 
 namespace PaymentAssistSDK.Tests;
 
@@ -13,7 +14,7 @@ public class AccountEndpointTest
     }
     
     [Fact]
-    public async void TestAccount()
+    public async Task TestAccount()
     {
         var response = await PASDK.Account();
 

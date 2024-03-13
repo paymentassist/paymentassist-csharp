@@ -1,5 +1,6 @@
 using Xunit;
 using System;
+using System.Threading.Tasks;
 
 namespace PaymentAssistSDK.Tests;
 
@@ -13,7 +14,7 @@ public class BeginEndpointTest
     }
     
     [Fact]
-    public async void TestBegin()
+    public async Task TestBegin()
     {
         var request = new BeginRequest{
             OrderID = "111",
@@ -31,7 +32,7 @@ public class BeginEndpointTest
     }
 
     [Fact]
-    public async void TestValidate()
+    public async Task TestValidate()
     {
         var request = new BeginRequest();
 

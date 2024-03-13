@@ -1,6 +1,7 @@
 using Xunit;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PaymentAssistSDK.Tests;
 
@@ -14,7 +15,7 @@ public class RequestHelpersTest
     }
     
     [Fact]
-    public async void TestCheckCredentials()
+    public async Task TestCheckCredentials()
     {
         try
         {
@@ -81,6 +82,7 @@ public class RequestHelpersTest
         finally
         {
             TestHelpers.TestsAreRunning = true;
+            PASDK.Initialise("test", "test", "");
         }
     }
 }

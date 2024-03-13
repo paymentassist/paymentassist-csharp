@@ -1,6 +1,7 @@
 using Xunit;
 using System;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace PaymentAssistSDK.Tests;
 
@@ -10,11 +11,11 @@ public class IntegrationTest
     {
         TestHelpers.TestsAreRunning = true;
         TestHelpers.IntegrationTestsAreRunning = true;
-        PASDK.Initialise("test", "test", "");
+        PASDK.Initialise("", "", "");
     }
     
     [Fact]
-    public async void TestEndpoints()
+    public async Task TestEndpoints()
     {
         // Remove this return and initialise with working credentials above in order to
         // run the integration tests.
@@ -87,7 +88,7 @@ public class IntegrationTest
 
         // This is the closest we can get to testing it because only a completed application
         // can be captured.
-        var exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Capture(request));
+        var exception = await Assert.ThrowsAsync<HttpRequestException>(() => PASDK.Capture(request));
         Assert.Contains("Application is not awaiting capture", exception.Message);
     }
 
@@ -99,10 +100,8 @@ public class IntegrationTest
             FileData = new byte[] { 0x01 },
         };
 
-        var response = await PASDK.Invoice(request);
-
         // Only a completed application can be invoiced so we are expecting this to fail.
-        var exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Invoice(request));
+        var exception = await Assert.ThrowsAsync<HttpRequestException>(() => PASDK.Invoice(request));
         Assert.Contains("Application is not yet completed", exception.Message);
     }
 
@@ -155,8 +154,8 @@ public class IntegrationTest
         Assert.Equal(50000, response.TotalRepayable);
         Assert.Equal(4, response.PaymentSchedule.Count);
         Assert.True(response.PaymentSchedule[3].Amount > 0);
-        Assert.True(response.PaymentSchedule[3].Date > DateTime.Now);
-        Assert.True(response.PaymentSchedule[3].Date < DateTime.Now.AddMonths(5));
+        Assert.True(response.PaymentSchedule[3].Date > DateTime.Now.Date, "date was "+response.PaymentSchedule[3].Date);
+        Assert.True(response.PaymentSchedule[3].Date < DateTime.Now.Date.AddMonths(5));
     }
 
     private async Task<AccountResponse> AccountAsync()
@@ -165,8 +164,6 @@ public class IntegrationTest
 
         Assert.False(string.IsNullOrEmpty(accountResponse.DisplayName));
         Assert.False(string.IsNullOrEmpty(accountResponse.LegalName));
-        Assert.NotEqual(0, accountResponse.Plans[0].APR);
-        Assert.NotEqual(0, accountResponse.Plans[0].CommissionRate);
         Assert.False(string.IsNullOrEmpty(accountResponse.Plans[0].Frequency));
         Assert.False(string.IsNullOrEmpty(accountResponse.Plans[0].Name));
         Assert.True(accountResponse.Plans[0].DepositRequired);

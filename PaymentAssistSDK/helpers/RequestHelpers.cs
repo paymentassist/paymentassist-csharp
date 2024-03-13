@@ -7,7 +7,7 @@ internal static class RequestHelpers
 {
     public static List<string> RemoveEmptyParams(List<string> requestParams)
     {
-        return requestParams.Where(x => !string.IsNullOrEmpty(x)).ToList();
+        return requestParams.Where(x => x.Split('=')[1] != "").ToList();
     }
 
     /// <summary>

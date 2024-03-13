@@ -1,5 +1,6 @@
 using Xunit;
 using System;
+using System.Threading.Tasks;
 
 namespace PaymentAssistSDK.Tests;
 
@@ -13,7 +14,7 @@ public class PreapprovalEndpointTest
     }
     
     [Fact]
-    public async void TestPreapproval()
+    public async Task TestPreapproval()
     {
         var request = new PreapprovalRequest{
             CustomerFirstName = "Test",
@@ -28,7 +29,7 @@ public class PreapprovalEndpointTest
     }
 
     [Fact]
-    public async void TestValidate()
+    public async Task TestValidate()
     {
         var request = new PreapprovalRequest();
 

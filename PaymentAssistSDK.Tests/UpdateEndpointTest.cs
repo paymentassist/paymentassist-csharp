@@ -1,5 +1,6 @@
 using Xunit;
 using System;
+using System.Threading.Tasks;
 
 namespace PaymentAssistSDK.Tests;
 
@@ -13,7 +14,7 @@ public class UpdateEndpointTest
     }
     
     [Fact]
-    public async void TestUpdate()
+    public async Task TestUpdate()
     {
         var request = new UpdateRequest{
             ApplicationID ="aed3bd4e-c478-4d73-a6fa-3640a7155e4f",
@@ -31,7 +32,7 @@ public class UpdateEndpointTest
     }
 
     [Fact]
-    public async void TestValidate()
+    public async Task TestValidate()
     {
         var request = new UpdateRequest();
 

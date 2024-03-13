@@ -1,5 +1,6 @@
 using Xunit;
 using System;
+using System.Threading.Tasks;
 
 namespace PaymentAssistSDK.Tests;
 
@@ -13,7 +14,7 @@ public class CaptureEndpointTest
     }
     
     [Fact]
-    public async void TestCapture()
+    public async Task TestCapture()
     {
         var request = new CaptureRequest{
             ApplicationID = "aed3bd4e-c478-4d73-a6fa-3640a7155e4f",
@@ -28,7 +29,7 @@ public class CaptureEndpointTest
     }
 
     [Fact]
-    public async void TestValidate()
+    public async Task TestValidate()
     {
         var request = new CaptureRequest();
 

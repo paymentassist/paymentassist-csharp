@@ -1,5 +1,6 @@
 using Xunit;
 using System;
+using System.Threading.Tasks;
 
 namespace PaymentAssistSDK.Tests;
 
@@ -13,7 +14,7 @@ public class PlanEndpointTest
     }
     
     [Fact]
-    public async void TestPlan()
+    public async Task TestPlan()
     {
         var request = new PlanRequest{
             Amount = 100000,
@@ -31,7 +32,7 @@ public class PlanEndpointTest
     }
 
     [Fact]
-    public async void TestValidate()
+    public async Task TestValidate()
     {
         var request = new PlanRequest();
 

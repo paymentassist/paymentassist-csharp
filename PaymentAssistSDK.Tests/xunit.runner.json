@@ -1,5 +1,7 @@
 {
     "xunit": {
       "maxParallelThreads": 1
-    }
+    },
+    "parallelizeAssembly": false,
+    "parallelizeTestCollections": false
   }
