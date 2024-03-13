@@ -13,13 +13,13 @@ public class StatusEndpointTest
     }
     
     [Fact]
-    public void TestStatus()
+    public async void TestStatus()
     {
         var request = new StatusRequest{
             ApplicationID = "aed3bd4e-c478-4d73-a6fa-3640a7155e4f",
         };
 
-        var response = PASDK.Status(request);
+        var response = await PASDK.Status(request);
 
         Assert.Equal("aed3bd4e-c478-4d73-a6fa-3640a7155e4f", response.ApplicationID);
         Assert.Equal("pending", response.Status);
@@ -35,7 +35,7 @@ public class StatusEndpointTest
     {
         var request = new StatusRequest();
 
-        var exception = Assert.Throws<ArgumentException>(() => PASDK.Status(request));
+        var exception = Assert.ThrowsAsync<ArgumentException>(() => PASDK.Status(request)).GetAwaiter().GetResult();
         Assert.Equal("ApplicationID cannot be empty", exception.Message);
 
         request.ApplicationID = "test";

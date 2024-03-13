@@ -66,7 +66,7 @@ internal static class RequestHelpers
             throw new ArgumentException("APIURL must contain the characters \"https:\"");
     }
 
-    public static T DoAPIPOSTRequest<T>(List<string> formData, string endpoint) where T : new()
+    public static async Task<T> DoAPIPOSTRequestAsync<T>(List<string> formData, string endpoint) where T : new()
     {
         CheckCredentials();
 
@@ -84,8 +84,8 @@ internal static class RequestHelpers
             client.Timeout = TimeSpan.FromSeconds(30);
             client.DefaultRequestHeaders.Add("X-Origin", "payment-assist-csharp-sdk");
 
-            var response = client.PostAsync(endpoint, formValues).Result;
-            var body = response.Content.ReadAsStringAsync().Result;
+            var response = await client.PostAsync(endpoint, formValues);
+            var body = await response.Content.ReadAsStringAsync();
 
             if (body == null || body.Length == 0)
                 throw new HttpRequestException("the API response was malformed - the body was empty");
@@ -105,7 +105,7 @@ internal static class RequestHelpers
         }
     } 
 
-    public static T DoAPIGETRequest<T>(List<string> formData, string endpoint) where T : new()
+    public static async Task<T> DoAPIGETRequestAsync<T>(List<string> formData, string endpoint) where T : new()
     {
         CheckCredentials();
 
@@ -127,8 +127,8 @@ internal static class RequestHelpers
             client.Timeout = TimeSpan.FromSeconds(30);
             client.DefaultRequestHeaders.Add("X-Origin", "payment-assist-csharp-sdk");
 
-            var response = client.GetAsync(endpoint).Result;
-            var body = response.Content.ReadAsStringAsync().Result;
+            var response = await client.GetAsync(endpoint);
+            var body = await response.Content.ReadAsStringAsync();
 
             if (body.Length == 0)
                 throw new HttpRequestException("the API response was malformed - the body was empty");

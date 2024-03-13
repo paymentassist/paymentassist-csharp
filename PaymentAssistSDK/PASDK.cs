@@ -18,7 +18,7 @@ public static class PASDK
     /// <summary>
     /// Returns information about this dealer's account, including what plan types are available.
     /// </summary>
-    public static AccountResponse Account()
+    public static Task<AccountResponse> Account()
     {
         return AccountEndpoint.Fetch();
     }
@@ -26,7 +26,7 @@ public static class PASDK
     /// <summary>
     /// Begins the application process.
     /// </summary>
-    public static BeginResponse Begin(BeginRequest request)
+    public static Task<BeginResponse> Begin(BeginRequest request)
     {
         return BeginEndpoint.Fetch(request);
     }
@@ -34,7 +34,7 @@ public static class PASDK
     /// <summary>
     /// Finalises an application that's currently in a "pending_capture" state.
     /// </summary>
-    public static CaptureResponse Capture(CaptureRequest request)
+    public static Task<CaptureResponse> Capture(CaptureRequest request)
     {
         return CaptureEndpoint.Fetch(request); 
     }
@@ -42,7 +42,7 @@ public static class PASDK
     /// <summary>
     /// Uploads an invoice for a completed application.
     /// </summary>
-    public static InvoiceResponse Invoice(InvoiceRequest request)
+    public static Task<InvoiceResponse> Invoice(InvoiceRequest request)
     {
         return InvoiceEndpoint.Fetch(request);
     }
@@ -52,7 +52,7 @@ public static class PASDK
     /// Accepts a transaction amount and an optional plan ID and term length,
     /// returning a full repayment schedule including amounts and dates.
     /// </summary>
-    public static PlanResponse Plan(PlanRequest request)
+    public static Task<PlanResponse> Plan(PlanRequest request)
     {
         return PlanEndpoint.Fetch(request);
     }
@@ -63,7 +63,7 @@ public static class PASDK
     /// will still need to have funds available to cover any deposit payment for
     /// the application to be successful.
     /// </summary>
-    public static PreapprovalResponse Preapproval(PreapprovalRequest request)
+    public static Task<PreapprovalResponse> Preapproval(PreapprovalRequest request)
     {
         return PreapprovalEndpoint.Fetch(request);
     }
@@ -71,7 +71,7 @@ public static class PASDK
     /// <summary>
     /// Checks the status of an existing application.
     /// </summary>
-    public static StatusResponse Status(StatusRequest request)
+    public static Task<StatusResponse> Status(StatusRequest request)
     {
         return StatusEndpoint.Fetch(request);
     }
@@ -79,7 +79,7 @@ public static class PASDK
     /// <summary>
     /// Allows you to update an existing application.
     /// </summary>
-    public static UpdateResponse Update(UpdateRequest request)
+    public static Task<UpdateResponse> Update(UpdateRequest request)
     {
         return UpdateEndpoint.Fetch(request);
     }

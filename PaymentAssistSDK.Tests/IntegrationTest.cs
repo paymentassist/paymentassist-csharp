@@ -1,5 +1,6 @@
 using Xunit;
 using System;
+using System.Threading.Tasks;
 
 namespace PaymentAssistSDK.Tests;
 
@@ -13,32 +14,32 @@ public class IntegrationTest
     }
     
     [Fact]
-    public void TestEndpoints()
+    public async void TestEndpoints()
     {
         // Remove this return and initialise with working credentials above in order to
         // run the integration tests.
         return;
 
-        var accountResponse = Account();
+        var accountResponse = await AccountAsync();
         
-        Plan(accountResponse);
-        Preapproval();
+        await PlanAsync(accountResponse);
+        await PreapprovalAsync();
         
-        var beginResponse = Begin();
+        var beginResponse = await BeginAsync();
 
-        Status(beginResponse.ApplicationID);
-        Update(beginResponse.ApplicationID);
-        Capture(beginResponse.ApplicationID);
-        Invoice(beginResponse.ApplicationID);
+        await StatusAsync(beginResponse.ApplicationID);
+        await UpdateAsync(beginResponse.ApplicationID);
+        await CaptureAsync(beginResponse.ApplicationID);
+        await InvoiceAsync(beginResponse.ApplicationID);
     }
 
-    private void Status(string applicationID)
+    private async Task StatusAsync(string applicationID)
     {
         var request = new StatusRequest{
             ApplicationID = applicationID,
         };
 
-        var response = PASDK.Status(request);
+        var response = await PASDK.Status(request);
 
         Assert.Equal(100000, response.Amount);
         Assert.True(response.ExpiresAt > DateTime.Now);
@@ -49,7 +50,7 @@ public class IntegrationTest
         Assert.Equal("pending", response.Status);
     }
 
-    private void Update(string applicationID)
+    private async Task UpdateAsync(string applicationID)
     {
         // Test only updating some fields.
         var request = new UpdateRequest{
@@ -57,7 +58,7 @@ public class IntegrationTest
             Amount = 80000,
         };
 
-        var response = PASDK.Update(request);
+        var response = await PASDK.Update(request);
 
         Assert.Equal(80000, response.Amount);
         Assert.Null(response.ExpiresIn);
@@ -71,14 +72,14 @@ public class IntegrationTest
             ExpiresIn = 60 * 10,
         };
 
-        response = PASDK.Update(request);
+        response = await PASDK.Update(request);
 
         Assert.Equal(70000, response.Amount);
         Assert.Equal(600, response.ExpiresIn);
         Assert.Null(response.OrderID);
     }
 
-    private void Capture(string applicationID)
+    private async Task CaptureAsync(string applicationID)
     {
         var request = new CaptureRequest{
             ApplicationID = applicationID,
@@ -86,11 +87,11 @@ public class IntegrationTest
 
         // This is the closest we can get to testing it because only a completed application
         // can be captured.
-        var exception = Assert.Throws<ArgumentException>(() => PASDK.Capture(new CaptureRequest()));
+        var exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Capture(request));
         Assert.Contains("Application is not awaiting capture", exception.Message);
     }
 
-    private void Invoice(string applicationID)
+    private async Task InvoiceAsync(string applicationID)
     {
         var request = new InvoiceRequest{
             ApplicationID = applicationID,
@@ -98,14 +99,14 @@ public class IntegrationTest
             FileData = new byte[] { 0x01 },
         };
 
-        var response = PASDK.Invoice(request);
+        var response = await PASDK.Invoice(request);
 
         // Only a completed application can be invoiced so we are expecting this to fail.
-        var exception = Assert.Throws<ArgumentException>(() => PASDK.Invoice(new InvoiceRequest()));
+        var exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Invoice(request));
         Assert.Contains("Application is not yet completed", exception.Message);
     }
 
-    private BeginResponse Begin()
+    private async Task<BeginResponse> BeginAsync()
     {
         var request = new BeginRequest{
             OrderID = TestHelpers.GetRandomID(),
@@ -117,7 +118,7 @@ public class IntegrationTest
             EnableAutoCapture = false,
         };
 
-        var response = PASDK.Begin(request);
+        var response = await PASDK.Begin(request);
 
         Assert.Equal(36, response.ApplicationID.Length);
         Assert.True(response.ContinuationURL.Length > 10);
@@ -125,7 +126,7 @@ public class IntegrationTest
     	return response;
     }
 
-    private void Preapproval()
+    private async Task PreapprovalAsync()
     {
         var request = new PreapprovalRequest{
             CustomerFirstName = "Test",
@@ -134,19 +135,19 @@ public class IntegrationTest
             CustomerPostcode = "TEST TES",
         };
 
-        var response = PASDK.Preapproval(request);
+        var response = await PASDK.Preapproval(request);
 
         Assert.True(response.Approved);   
     }
 
-    private void Plan(AccountResponse accountResponse)
+    private async Task PlanAsync(AccountResponse accountResponse)
     {
         var request = new PlanRequest{
             Amount = 50000,
             PlanID = accountResponse.Plans[0].ID,
         };
 
-        var response = PASDK.Plan(request);
+        var response = await PASDK.Plan(request);
 
         Assert.Equal(50000, response.Amount);
         Assert.Equal(0, response.Interest);
@@ -158,9 +159,9 @@ public class IntegrationTest
         Assert.True(response.PaymentSchedule[3].Date < DateTime.Now.AddMonths(5));
     }
 
-    private AccountResponse Account()
+    private async Task<AccountResponse> AccountAsync()
     {
-        var accountResponse = PASDK.Account();
+        var accountResponse = await PASDK.Account();
 
         Assert.False(string.IsNullOrEmpty(accountResponse.DisplayName));
         Assert.False(string.IsNullOrEmpty(accountResponse.LegalName));

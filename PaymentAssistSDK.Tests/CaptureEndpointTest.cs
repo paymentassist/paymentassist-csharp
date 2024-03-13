@@ -13,13 +13,13 @@ public class CaptureEndpointTest
     }
     
     [Fact]
-    public void TestCapture()
+    public async void TestCapture()
     {
         var request = new CaptureRequest{
             ApplicationID = "aed3bd4e-c478-4d73-a6fa-3640a7155e4f",
         };
 
-        var response = PASDK.Capture(request);
+        var response = await PASDK.Capture(request);
 
         Assert.Equal("aed3bd4e-c478-4d73-a6fa-3640a7155e4f", response.ApplicationID);
         Assert.Equal("completed", response.Status);
@@ -28,14 +28,14 @@ public class CaptureEndpointTest
     }
 
     [Fact]
-    public void TestValidate()
+    public async void TestValidate()
     {
         var request = new CaptureRequest();
 
-        var exception = Assert.Throws<ArgumentException>(() => PASDK.Capture(request));
+        var exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Capture(request));
         Assert.Equal("ApplicationID cannot be empty", exception.Message);
 
         request.ApplicationID = "test";
-        PASDK.Capture(request);
+        await PASDK.Capture(request);
     }
 }

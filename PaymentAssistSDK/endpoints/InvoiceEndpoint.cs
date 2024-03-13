@@ -2,7 +2,7 @@
 
 internal static class InvoiceEndpoint
 {
-    public static InvoiceResponse Fetch(InvoiceRequest request)
+    public static Task<InvoiceResponse> Fetch(InvoiceRequest request)
     {
         Validate(request);
 
@@ -22,7 +22,7 @@ internal static class InvoiceEndpoint
 
         var requestURL = RequestHelpers.GetRequestURL();
 
-        return RequestHelpers.DoAPIPOSTRequest<InvoiceResponse>(requestParams, requestURL + "invoice");
+        return RequestHelpers.DoAPIPOSTRequestAsync<InvoiceResponse>(requestParams, requestURL + "invoice");
     }
 
     private static void Validate(InvoiceRequest request)

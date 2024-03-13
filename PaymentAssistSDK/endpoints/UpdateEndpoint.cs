@@ -2,7 +2,7 @@
 
 internal static class UpdateEndpoint
 {
-    public static UpdateResponse Fetch(UpdateRequest request)
+    public static Task<UpdateResponse> Fetch(UpdateRequest request)
     {
         Validate(request);
 
@@ -23,7 +23,7 @@ internal static class UpdateEndpoint
 
         var requestURL = RequestHelpers.GetRequestURL();
 
-        return RequestHelpers.DoAPIPOSTRequest<UpdateResponse>(requestParams, requestURL + "update");
+        return RequestHelpers.DoAPIPOSTRequestAsync<UpdateResponse>(requestParams, requestURL + "update");
     }
 
     private static void Validate(UpdateRequest request)

@@ -2,7 +2,7 @@
 
 internal static class PreapprovalEndpoint
 {
-    public static PreapprovalResponse Fetch(PreapprovalRequest request)
+    public static Task<PreapprovalResponse> Fetch(PreapprovalRequest request)
     {
         Validate(request);
 
@@ -23,7 +23,7 @@ internal static class PreapprovalEndpoint
 
         var requestURL = RequestHelpers.GetRequestURL();
 
-        return RequestHelpers.DoAPIPOSTRequest<PreapprovalResponse>(requestParams, requestURL + "preapproval");
+        return RequestHelpers.DoAPIPOSTRequestAsync<PreapprovalResponse>(requestParams, requestURL + "preapproval");
     }
 
     private static void Validate(PreapprovalRequest request)

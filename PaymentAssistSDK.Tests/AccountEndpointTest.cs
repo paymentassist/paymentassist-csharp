@@ -13,9 +13,9 @@ public class AccountEndpointTest
     }
     
     [Fact]
-    public void TestAccount()
+    public async void TestAccount()
     {
-        var response = PASDK.Account();
+        var response = await PASDK.Account();
 
         Assert.Equal("Test Dealer", response.DisplayName);
         Assert.Equal("Test Dealer", response.LegalName);

@@ -2,7 +2,7 @@
 
 internal static class AccountEndpoint
 {
-    public static AccountResponse Fetch()
+    public static Task<AccountResponse> Fetch()
     {
         var signature = RequestHelpers.GenerateSignature(new List<string>(), DataStore.APISecret);
             
@@ -13,6 +13,6 @@ internal static class AccountEndpoint
 
         var requestURL = RequestHelpers.GetRequestURL();
 
-        return RequestHelpers.DoAPIGETRequest<AccountResponse>(requestParams, requestURL + "account");
+        return RequestHelpers.DoAPIGETRequestAsync<AccountResponse>(requestParams, requestURL + "account");
     }
 }

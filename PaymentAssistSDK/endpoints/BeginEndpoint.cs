@@ -6,7 +6,7 @@ namespace PaymentAssistSDK;
 
 internal static class BeginEndpoint
 {
-    public static BeginResponse Fetch(BeginRequest request)
+    public static Task<BeginResponse> Fetch(BeginRequest request)
     {
         request = ApplyDefaults(request);
 
@@ -47,7 +47,7 @@ internal static class BeginEndpoint
 
         var requestURL = RequestHelpers.GetRequestURL();
 
-        return RequestHelpers.DoAPIPOSTRequest<BeginResponse>(requestParams, requestURL + "begin");
+        return RequestHelpers.DoAPIPOSTRequestAsync<BeginResponse>(requestParams, requestURL + "begin");
     }
 
     private static void Validate(BeginRequest request)

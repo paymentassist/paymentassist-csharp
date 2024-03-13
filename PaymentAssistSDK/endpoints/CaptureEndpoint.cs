@@ -2,7 +2,7 @@
 
 internal static class CaptureEndpoint
 {
-    public static CaptureResponse Fetch(CaptureRequest request)
+    public static Task<CaptureResponse> Fetch(CaptureRequest request)
     {
         Validate(request);
 
@@ -20,7 +20,7 @@ internal static class CaptureEndpoint
 
         var requestURL = RequestHelpers.GetRequestURL();
 
-        return RequestHelpers.DoAPIPOSTRequest<CaptureResponse>(requestParams, requestURL + "capture");
+        return RequestHelpers.DoAPIPOSTRequestAsync<CaptureResponse>(requestParams, requestURL + "capture");
 	}
 
     private static void Validate(CaptureRequest request)

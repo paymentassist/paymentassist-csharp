@@ -14,22 +14,22 @@ public class RequestHelpersTest
     }
     
     [Fact]
-    public void TestCheckCredentials()
+    public async void TestCheckCredentials()
     {
         try
         {
             DataStore.APIKey = "";
             DataStore.APISecret = "";
 
-            var exception = Assert.Throws<ArgumentException>(() => PASDK.Account());
+            var exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Account());
             Assert.Equal("APIKey cannot be empty - call PASDK.Initialise to pass in your credentials", exception.Message);
             
             PASDK.Initialise("test", "", "");
-            exception = Assert.Throws<ArgumentException>(() => PASDK.Account());
+            exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Account());
             Assert.Equal("APISecret cannot be empty - call PASDK.Initialise to pass in your credentials", exception.Message);
 
             PASDK.Initialise("test", "test", "test");
-            PASDK.Account();
+            await PASDK.Account();
         }
         finally
         {

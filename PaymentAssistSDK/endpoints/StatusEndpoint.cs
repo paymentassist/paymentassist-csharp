@@ -2,7 +2,7 @@
 
 internal static class StatusEndpoint
 {
-    public static StatusResponse Fetch(StatusRequest request)
+    public static Task<StatusResponse> Fetch(StatusRequest request)
     {
         Validate(request);
 
@@ -20,7 +20,7 @@ internal static class StatusEndpoint
 
         var requestURL = RequestHelpers.GetRequestURL();
 
-        return RequestHelpers.DoAPIGETRequest<StatusResponse>(requestParams, requestURL + "status");
+        return RequestHelpers.DoAPIGETRequestAsync<StatusResponse>(requestParams, requestURL + "status");
     }
 
     private static void Validate(StatusRequest request)

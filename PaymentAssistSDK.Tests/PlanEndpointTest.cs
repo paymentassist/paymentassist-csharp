@@ -13,14 +13,14 @@ public class PlanEndpointTest
     }
     
     [Fact]
-    public void TestPlan()
+    public async void TestPlan()
     {
         var request = new PlanRequest{
             Amount = 100000,
             PlanID = 5,
         };
 
-        var response = PASDK.Plan(request);
+        var response = await PASDK.Plan(request);
 
         Assert.Equal("4-Payment", response.PlanName);
         Assert.Equal(50000, response.Amount);
@@ -31,14 +31,14 @@ public class PlanEndpointTest
     }
 
     [Fact]
-    public void TestValidate()
+    public async void TestValidate()
     {
         var request = new PlanRequest();
 
-        var exception = Assert.Throws<ArgumentException>(() => PASDK.Plan(request));
+        var exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Plan(request));
         Assert.Equal("Amount must be greater than 0", exception.Message);
 
         request.Amount = 10000;
-        PASDK.Plan(request);
+        await PASDK.Plan(request);
     }
 }

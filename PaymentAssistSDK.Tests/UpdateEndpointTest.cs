@@ -13,7 +13,7 @@ public class UpdateEndpointTest
     }
     
     [Fact]
-    public void TestUpdate()
+    public async void TestUpdate()
     {
         var request = new UpdateRequest{
             ApplicationID ="aed3bd4e-c478-4d73-a6fa-3640a7155e4f",
@@ -22,7 +22,7 @@ public class UpdateEndpointTest
             ExpiresIn = 600,
         };
 
-        var response = PASDK.Update(request);
+        var response = await PASDK.Update(request);
 
         Assert.Equal("aed3bd4e-c478-4d73-a6fa-3640a7155e4f", response.ApplicationID);
         Assert.Equal(100000, response.Amount);
@@ -31,14 +31,14 @@ public class UpdateEndpointTest
     }
 
     [Fact]
-    public void TestValidate()
+    public async void TestValidate()
     {
         var request = new UpdateRequest();
 
-        var exception = Assert.Throws<ArgumentException>(() => PASDK.Update(request));
+        var exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Update(request));
         Assert.Equal("ApplicationID cannot be empty", exception.Message);
 
         request.ApplicationID = "test";
-        PASDK.Update(request);
+        await PASDK.Update(request);
     }
 }

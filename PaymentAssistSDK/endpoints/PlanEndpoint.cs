@@ -2,7 +2,7 @@
 
 internal static class PlanEndpoint
 {
-    public static PlanResponse Fetch(PlanRequest request)
+    public static Task<PlanResponse> Fetch(PlanRequest request)
     {
         Validate(request);
 
@@ -21,7 +21,7 @@ internal static class PlanEndpoint
 
         var requestURL = RequestHelpers.GetRequestURL();
 
-        return RequestHelpers.DoAPIPOSTRequest<PlanResponse>(requestParams, requestURL + "plan");
+        return RequestHelpers.DoAPIPOSTRequestAsync<PlanResponse>(requestParams, requestURL + "plan");
 	}
 
     private static void Validate(PlanRequest request)

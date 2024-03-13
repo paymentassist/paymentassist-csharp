@@ -13,7 +13,7 @@ public class PreapprovalEndpointTest
     }
     
     [Fact]
-    public void TestPreapproval()
+    public async void TestPreapproval()
     {
         var request = new PreapprovalRequest{
             CustomerFirstName = "Test",
@@ -22,32 +22,32 @@ public class PreapprovalEndpointTest
             CustomerPostcode = "TEST TES",
         };
 
-        var response = PASDK.Preapproval(request);
+        var response = await PASDK.Preapproval(request);
 
         Assert.True(response.Approved);   
     }
 
     [Fact]
-    public void TestValidate()
+    public async void TestValidate()
     {
         var request = new PreapprovalRequest();
 
-        var exception = Assert.Throws<ArgumentException>(() => PASDK.Preapproval(request));
+        var exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Preapproval(request));
         Assert.Equal("CustomerFirstName cannot be empty", exception.Message);
 
         request.CustomerFirstName = "test";
-        exception = Assert.Throws<ArgumentException>(() => PASDK.Preapproval(request));
+        exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Preapproval(request));
         Assert.Equal("CustomerLastName cannot be empty", exception.Message);
 
         request.CustomerLastName = "test";
-        exception = Assert.Throws<ArgumentException>(() => PASDK.Preapproval(request));
+        exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Preapproval(request));
         Assert.Equal("CustomerAddress1 cannot be empty", exception.Message);
 
         request.CustomerAddress1 = "test";
-        exception = Assert.Throws<ArgumentException>(() => PASDK.Preapproval(request));
+        exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Preapproval(request));
         Assert.Equal("CustomerPostcode cannot be empty", exception.Message);
 
         request.CustomerPostcode = "test";
-        PASDK.Preapproval(request);
+        await PASDK.Preapproval(request);
     }
 }
