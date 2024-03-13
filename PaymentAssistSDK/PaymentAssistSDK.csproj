@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>PaymentAssistSDK</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Payment Assist</Authors>
+    <Company>Payment Assist Ltd</Company>
+    <Product>PaymentAssistSDK</Product>
+    <Description>The official C# SDK for the Payment Assist API.</Description>
+    <RepositoryUrl>https://github.com/paymentassist/paymentassist-csharp</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>
