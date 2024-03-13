@@ -20,7 +20,7 @@ The official C# SDK for the Payment Assist Merchant API.
 
 The full API reference can be found here: https://api-docs.payment-assist.co.uk/.
 
-To use this SDK, first initialise it by calling `PASDK.Initialise(...)`, which takes your API credentials as well as the PaymentAssist API URL you want to make requests to. You only need to call this once.
+To use this SDK, first initialise it by calling `PASDK.Initialise(...)`, which takes your API credentials as well as the PaymentAssist API URL you want to make requests to.
 
 ```
 PASDK.Initialise("my_api_key", "my_api_secret", "https://api.demo.payassi.st/");
@@ -28,7 +28,7 @@ PASDK.Initialise("my_api_key", "my_api_secret", "https://api.demo.payassi.st/");
 
 Note that it is not recommended to hard-code your API credentials like in the above example, this is just for illustration purposes.
 
-After this, you can being to make the requests against the API via the static methods provided. Most requests take a single data class parameter and return a single response object. A nullable request field generally indicates that it is optional.
+After this, you can being to make the requests against the API via the static methods provided. Most requests take a single data class parameter and return a single response object. Nullable fields are generally optional.
 
 In the case of failure, the SDK will throw an error. Where the API refuses a request, or where there was an internal API error (e.g. any 4xx or 5xx response code), a `HttpRequestException` will be thrown. If you pass invalid request parameters, an `ArgumentException` will be thrown. Where the SDK encounters some irrecoverable error, an `InvalidOperationException` exception is thrown. Other exceptions are also possible, although the SDK does not intentionally throw these.
 
@@ -37,16 +37,10 @@ Note that `InvoiceRequest` and `CaptureRequest` may return a response without th
 Example:
 
 ```
-request := pasdk.AccountRequest{}
-accountResponse, err := request.Fetch()
-
-if err != nil {
-    fmt.Println("There was an error: "+err.Error())
-	return
-}
+var accountResponse = await PASDK.Account();
 
 // Print the dealer's display name.
-fmt.Println(accountResponse.DisplayName)
+Console.WriteLine(accountResponse.DisplayName);
 ```
 
 The following actions are available:
