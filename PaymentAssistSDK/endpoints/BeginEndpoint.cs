@@ -37,11 +37,11 @@ internal static class BeginEndpoint
             "telephone=" + request.CustomerTelephone,
             "town=" + request.CustomerTown,
             "webhook_url=" + request.WebhookURL,
-	    };
-
-	    requestParams = RequestHelpers.RemoveEmptyParams(requestParams);
-	    var signature = RequestHelpers.GenerateSignature(requestParams, DataStore.APISecret);
-
+        };
+        
+        requestParams = RequestHelpers.RemoveEmptyParams(requestParams);
+        var signature = RequestHelpers.GenerateSignature(requestParams, DataStore.APISecret);
+        
         requestParams.Add("api_key=" + DataStore.APIKey);
         requestParams.Add("signature=" + signature);
 
