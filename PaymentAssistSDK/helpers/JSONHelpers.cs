@@ -16,7 +16,7 @@ internal static class JSONHelpers
         var result = JsonSerializer.Deserialize<T>(json, _jsonOptions);
 
         if (result == null)
-            throw new InvalidOperationException("failed to deserialize object: "+json);
+            throw new InvalidOperationException("failed to deserialize JSON object: "+json);
 
         return result;
     }

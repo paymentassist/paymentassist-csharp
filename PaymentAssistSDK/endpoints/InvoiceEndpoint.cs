@@ -14,7 +14,6 @@ internal static class InvoiceEndpoint
         };
 
         requestParams = RequestHelpers.RemoveEmptyParams(requestParams);
-
         var signature = RequestHelpers.GenerateSignature(requestParams, DataStore.APISecret);
 
         requestParams.Add("api_key=" + DataStore.APIKey);

@@ -12,7 +12,8 @@ internal static class BeginEndpoint
 
         Validate(request);
 
-        var requestParams = new List<string> {
+        var requestParams = new List<string> 
+        {
             "addr1=" + request.CustomerAddress1,
             "addr2=" + request.CustomerAddress2,
             "addr3=" + request.CustomerAddress3,

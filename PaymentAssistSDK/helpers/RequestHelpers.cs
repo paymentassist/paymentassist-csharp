@@ -26,7 +26,7 @@ internal static class RequestHelpers
             var hashBytes = hasher.ComputeHash(Encoding.UTF8.GetBytes(requestString));
             return Convert.ToHexString(hashBytes).ToLower();
         }
-	}
+    }
 
     private static List<string> CapitaliseParamKeys(List<string> requestParams)
     {
@@ -42,12 +42,6 @@ internal static class RequestHelpers
         if (TestHelpers.TestsAreRunning && !TestHelpers.IntegrationTestsAreRunning)
             return "";
 
-        if (!DataStore.APIURL.Contains("https:"))
-            throw new ArgumentException("the API URL must contain the string \"https:\"");
-
-        if (DataStore.APIURL.Last() != '/')
-            return DataStore.APIURL + "/";
-
         return DataStore.APIURL;
     }
 
@@ -57,13 +51,13 @@ internal static class RequestHelpers
     private static void CheckCredentials()
     {
         if (string.IsNullOrEmpty(DataStore.APIKey))
-            throw new ArgumentException("APIKey cannot be empty - call PASDK.Initialise to pass in your credentials");
+            throw new ArgumentException("you API key is empty - call PASDK.Initialise to pass in your credentials");
         if (string.IsNullOrEmpty(DataStore.APISecret))
-            throw new ArgumentException("APISecret cannot be empty - call PASDK.Initialise to pass in your credentials");
+            throw new ArgumentException("your API secret is empty - call PASDK.Initialise to pass in your credentials");
         if (string.IsNullOrEmpty(DataStore.APIURL) && !TestHelpers.TestsAreRunning)
-            throw new ArgumentException("APIURL cannot be empty - call PASDK.Initialise to pass in the URL you want to send a request to");
+            throw new ArgumentException("the API URL is empty - call PASDK.Initialise to pass in the URL you want to send a request to");
         if (!DataStore.APIURL.Contains("https:") && !TestHelpers.TestsAreRunning)
-            throw new ArgumentException("APIURL must contain the characters \"https:\"");
+            throw new ArgumentException("the API URL must contain the characters \"https:\"");
     }
 
     public static async Task<T> DoAPIPOSTRequestAsync<T>(List<string> formData, string endpoint) where T : new()
@@ -96,12 +90,14 @@ internal static class RequestHelpers
 
             var result = JSONHelpers.Deserialize<APIResponse<T>>(body);
 
+            if (result == null)
+                throw new InvalidOperationException("failed to deserialise response JSON: " + body);
             if (result.Status == "error")
                 throw new HttpRequestException("the API refused your request: " + body);
             if (result.Status != "ok")
                 throw new HttpRequestException("the API returned an unexpected response: " + body);
-            if (result == null || result.Data == null)
-                throw new InvalidOperationException("failed to deserialise response JSON: " + body);
+            if (result.Data == null)
+                throw new InvalidOperationException("failed to deserialise response data: " + body);
 
             return result.Data;
         }
@@ -141,12 +137,14 @@ internal static class RequestHelpers
 
             var result = JSONHelpers.Deserialize<APIResponse<T>>(body);
 
+            if (result == null)
+                throw new InvalidOperationException("failed to deserialise response JSON: " + body);
             if (result.Status == "error")
                 throw new HttpRequestException("the API refused your request: " + body);
             if (result.Status != "ok")
                 throw new HttpRequestException("the API returned an unexpected response: " + body);
-            if (result == null || result.Data == null)
-                throw new InvalidOperationException("failed to deserialise response JSON: " + body);
+            if (result.Data == null)
+                throw new InvalidOperationException("failed to deserialise response data JSON: " + body);
 
             return result.Data;
         }
@@ -157,7 +155,7 @@ internal static class RequestHelpers
     /// </summary>
     private static void CheckStatusCode(int statusCode, string body)
     {
-	    if ((statusCode >= 0 && statusCode < 200)
+        if ((statusCode >= 0 && statusCode < 200)
             || (statusCode >= 300 && statusCode < 400)
             || (statusCode >= 500 && statusCode < 600))
         {
