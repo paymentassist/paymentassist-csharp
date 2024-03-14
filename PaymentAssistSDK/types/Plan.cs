@@ -17,7 +17,7 @@ public class Plan
     /// The name of this plan.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; }= "";
+    public string Name { get; set; } = "";
 
     /// <summary>
     /// The number of instalments in this plan.
@@ -38,7 +38,7 @@ public class Plan
     public decimal APR { get; set; }
 
     /// <summary>
-    /// How often payments are made on this plan.
+    /// How often repayments are made on this plan.
     /// </summary>
     [JsonPropertyName("frequency")]
     public string Frequency { get; set; } = "";
@@ -59,7 +59,7 @@ public class Plan
     /// The Payment Assist commission rate charged under this plan as a percentage. 
     /// </summary>
     [JsonPropertyName("commission_rate")]
-	public decimal CommissionRate { get; set; }
+    public decimal CommissionRate { get; set; }
 
     /// <summary>
     /// The Payment Assist fixed commission fee charged under this plan in pence.

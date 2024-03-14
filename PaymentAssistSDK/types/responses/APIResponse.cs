@@ -5,7 +5,7 @@ namespace PaymentAssistSDK;
 internal class APIResponse<T> where T : new()
 {
     [JsonPropertyName("data")]
-    public T Data { get; set; } = new();
+    public T? Data { get; set; }
 
     [JsonPropertyName("msg")]
     public string Message { get; set; } = "";

@@ -28,7 +28,7 @@ PASDK.Initialise("my_api_key", "my_api_secret", "https://api.demo.payassi.st/");
 
 Note that it is not recommended to hard-code your API credentials like in the above example, this is just for illustration purposes.
 
-After this, you can being to make the requests against the API via the static methods provided. Most requests take a single data class parameter and return a single response object. Nullable fields are generally optional.
+After this, you can being to make requests against the API via the static methods provided. Most endpoints take a single data object as a parameter and return a single response object. Nullable fields are generally optional.
 
 In the case of failure, the SDK will throw an error. Where the API refuses a request, or where there was an internal API error (e.g. any 4xx or 5xx response code), a `HttpRequestException` will be thrown. If you pass invalid request parameters, an `ArgumentException` will be thrown. Where the SDK encounters some irrecoverable error, an `InvalidOperationException` exception is thrown. Other exceptions are also possible, although the SDK does not intentionally throw these.
 

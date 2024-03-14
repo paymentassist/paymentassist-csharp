@@ -72,7 +72,6 @@ public struct BeginRequest
     /// </summary>
     public bool? SendSMS;
 
-
     /// <summary>
     /// If true, the customer will see a list of all available payment plans and will
     /// be able to select one themselves. Defaults to false.

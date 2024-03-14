@@ -23,11 +23,11 @@ public class RequestHelpersTest
             DataStore.APISecret = "";
 
             var exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Account());
-            Assert.Equal("APIKey cannot be empty - call PASDK.Initialise to pass in your credentials", exception.Message);
+            Assert.Equal("your API key is empty - call PASDK.Initialise to pass in your credentials", exception.Message);
             
             PASDK.Initialise("test", "", "");
             exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Account());
-            Assert.Equal("APISecret cannot be empty - call PASDK.Initialise to pass in your credentials", exception.Message);
+            Assert.Equal("your API secret is empty - call PASDK.Initialise to pass in your credentials", exception.Message);
 
             PASDK.Initialise("test", "test", "test");
             await PASDK.Account();

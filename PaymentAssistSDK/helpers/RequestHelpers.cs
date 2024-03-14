@@ -51,7 +51,7 @@ internal static class RequestHelpers
     private static void CheckCredentials()
     {
         if (string.IsNullOrEmpty(DataStore.APIKey))
-            throw new ArgumentException("you API key is empty - call PASDK.Initialise to pass in your credentials");
+            throw new ArgumentException("your API key is empty - call PASDK.Initialise to pass in your credentials");
         if (string.IsNullOrEmpty(DataStore.APISecret))
             throw new ArgumentException("your API secret is empty - call PASDK.Initialise to pass in your credentials");
         if (string.IsNullOrEmpty(DataStore.APIURL) && !TestHelpers.TestsAreRunning)
@@ -73,7 +73,7 @@ internal static class RequestHelpers
         }));
 
         if (TestHelpers.TestsAreRunning && !TestHelpers.IntegrationTestsAreRunning)
-            return MockResponses.GetMockAPIResponse<T>(endpoint).Data;
+            return MockResponses.GetMockAPIResponse<T>(endpoint).Data!;
 
         using (var client = new HttpClient())
         {
@@ -120,7 +120,7 @@ internal static class RequestHelpers
         endpoint = endpoint.Remove(endpoint.Length - 1);
 
         if (TestHelpers.TestsAreRunning && !TestHelpers.IntegrationTestsAreRunning)
-            return MockResponses.GetMockAPIResponse<T>(endpoint).Data;
+            return MockResponses.GetMockAPIResponse<T>(endpoint).Data!;
 
         using (var client = new HttpClient())
         {
