@@ -11,8 +11,6 @@ internal static class AccountEndpoint
             "signature=" + signature
         };
 
-        var requestURL = RequestHelpers.GetRequestURL();
-
-        return RequestHelpers.DoAPIGETRequestAsync<AccountResponse>(requestParams, requestURL + "account");
+        return RequestHelpers.DoAPIGETRequestAsync<AccountResponse>(requestParams, "account");
     }
 }

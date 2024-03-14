@@ -68,6 +68,8 @@ internal static class RequestHelpers
 
     public static async Task<T> DoAPIPOSTRequestAsync<T>(List<string> formData, string endpoint) where T : new()
     {
+        endpoint = GetRequestURL() + endpoint;
+
         CheckCredentials();
 
         var formValues = new FormUrlEncodedContent(formData.Select(x =>
@@ -107,6 +109,8 @@ internal static class RequestHelpers
 
     public static async Task<T> DoAPIGETRequestAsync<T>(List<string> formData, string endpoint) where T : new()
     {
+        endpoint = GetRequestURL() + endpoint;
+
         CheckCredentials();
 
         endpoint += "?";

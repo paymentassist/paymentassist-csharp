@@ -21,9 +21,7 @@ internal static class UpdateEndpoint
         requestParams.Add("api_key=" + DataStore.APIKey);
         requestParams.Add("signature=" + signature);
 
-        var requestURL = RequestHelpers.GetRequestURL();
-
-        return RequestHelpers.DoAPIPOSTRequestAsync<UpdateResponse>(requestParams, requestURL + "update");
+        return RequestHelpers.DoAPIPOSTRequestAsync<UpdateResponse>(requestParams, "update");
     }
 
     private static void Validate(UpdateRequest request)

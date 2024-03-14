@@ -45,9 +45,7 @@ internal static class BeginEndpoint
         requestParams.Add("api_key=" + DataStore.APIKey);
         requestParams.Add("signature=" + signature);
 
-        var requestURL = RequestHelpers.GetRequestURL();
-
-        return RequestHelpers.DoAPIPOSTRequestAsync<BeginResponse>(requestParams, requestURL + "begin");
+        return RequestHelpers.DoAPIPOSTRequestAsync<BeginResponse>(requestParams, "begin");
     }
 
     private static void Validate(BeginRequest request)

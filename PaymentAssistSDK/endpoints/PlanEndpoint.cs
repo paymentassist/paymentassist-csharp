@@ -19,9 +19,7 @@ internal static class PlanEndpoint
         requestParams.Add("api_key=" + DataStore.APIKey);
         requestParams.Add("signature=" + signature);
 
-        var requestURL = RequestHelpers.GetRequestURL();
-
-        return RequestHelpers.DoAPIPOSTRequestAsync<PlanResponse>(requestParams, requestURL + "plan");
+        return RequestHelpers.DoAPIPOSTRequestAsync<PlanResponse>(requestParams, "plan");
 	}
 
     private static void Validate(PlanRequest request)

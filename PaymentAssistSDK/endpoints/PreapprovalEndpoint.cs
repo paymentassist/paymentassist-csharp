@@ -21,9 +21,7 @@ internal static class PreapprovalEndpoint
         requestParams.Add("api_key=" + DataStore.APIKey);
         requestParams.Add("signature=" + signature);
 
-        var requestURL = RequestHelpers.GetRequestURL();
-
-        return RequestHelpers.DoAPIPOSTRequestAsync<PreapprovalResponse>(requestParams, requestURL + "preapproval");
+        return RequestHelpers.DoAPIPOSTRequestAsync<PreapprovalResponse>(requestParams, "preapproval");
     }
 
     private static void Validate(PreapprovalRequest request)

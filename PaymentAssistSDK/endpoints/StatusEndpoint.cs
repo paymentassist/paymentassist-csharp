@@ -18,9 +18,7 @@ internal static class StatusEndpoint
         requestParams.Add("api_key=" + DataStore.APIKey);
         requestParams.Add("signature=" + signature);
 
-        var requestURL = RequestHelpers.GetRequestURL();
-
-        return RequestHelpers.DoAPIGETRequestAsync<StatusResponse>(requestParams, requestURL + "status");
+        return RequestHelpers.DoAPIGETRequestAsync<StatusResponse>(requestParams, "status");
     }
 
     private static void Validate(StatusRequest request)

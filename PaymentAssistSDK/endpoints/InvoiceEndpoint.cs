@@ -20,9 +20,7 @@ internal static class InvoiceEndpoint
         requestParams.Add("api_key=" + DataStore.APIKey);
         requestParams.Add("signature=" + signature);
 
-        var requestURL = RequestHelpers.GetRequestURL();
-
-        return RequestHelpers.DoAPIPOSTRequestAsync<InvoiceResponse>(requestParams, requestURL + "invoice");
+        return RequestHelpers.DoAPIPOSTRequestAsync<InvoiceResponse>(requestParams, "invoice");
     }
 
     private static void Validate(InvoiceRequest request)

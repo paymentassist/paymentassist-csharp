@@ -18,9 +18,7 @@ internal static class CaptureEndpoint
         requestParams.Add("api_key=" + DataStore.APIKey);
         requestParams.Add("signature=" + signature);
 
-        var requestURL = RequestHelpers.GetRequestURL();
-
-        return RequestHelpers.DoAPIPOSTRequestAsync<CaptureResponse>(requestParams, requestURL + "capture");
+        return RequestHelpers.DoAPIPOSTRequestAsync<CaptureResponse>(requestParams, "capture");
 	}
 
     private static void Validate(CaptureRequest request)
