@@ -5,7 +5,7 @@ internal static class MockResponses
     public static APIResponse<T> GetMockAPIResponse<T>(string endpoint) where T : new()
     {
         // If this is a GET request then the endpoint will have parameters on it. Take them
-	    // off so we can match on the actual endpoint.
+        // off so we can match on the actual endpoint.
         if (endpoint.Contains("?"))
             endpoint = endpoint.Split('?')[0];
 

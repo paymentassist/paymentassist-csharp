@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace PaymentAssistSDK;
 
 /// <summary>
-/// Represents a repayment plan.
+/// Represents the basic characteristics of a given repayment plan.
 /// </summary>
 public class Plan
 {
