@@ -17,7 +17,7 @@ public class UpdateEndpointTest
     public async Task TestUpdate()
     {
         var request = new UpdateRequest{
-            ApplicationID ="aed3bd4e-c478-4d73-a6fa-3640a7155e4f",
+            ApplicationID = "aed3bd4e-c478-4d73-a6fa-3640a7155e4f",
             Amount = 100000,
             OrderID = "neworderid",
             ExpiresIn = 600,
