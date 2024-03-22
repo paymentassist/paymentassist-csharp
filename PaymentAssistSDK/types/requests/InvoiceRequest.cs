@@ -3,9 +3,9 @@ namespace PaymentAssistSDK;
 public struct InvoiceRequest
 {
     /// <summary>
-    /// The application ID (token) you received when calling the "begin" endpoint.
+    /// The token you received when calling the "begin" endpoint.
     /// </summary>
-    public string ApplicationID;
+    public string ApplicationToken;
 
     /// <summary>
     /// The file type. Some supported options are "pdf", "html", "txt", "doc" and "xls".

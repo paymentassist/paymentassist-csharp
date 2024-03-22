@@ -10,7 +10,7 @@ internal static class InvoiceEndpoint
         {
             "filedata=" + Convert.ToBase64String(request.FileData),
             "filetype=" + request.FileType,
-            "token=" + request.ApplicationID
+            "token=" + request.ApplicationToken
         };
 
         requestParams = RequestHelpers.RemoveEmptyParams(requestParams);
@@ -24,8 +24,8 @@ internal static class InvoiceEndpoint
 
     private static void Validate(InvoiceRequest request)
     {
-        if (string.IsNullOrEmpty(request.ApplicationID))
-            throw new ArgumentException("ApplicationID cannot be empty");
+        if (string.IsNullOrEmpty(request.ApplicationToken))
+            throw new ArgumentException("ApplicationToken cannot be empty");
         if (string.IsNullOrEmpty(request.FileType))
             throw new ArgumentException("FileType cannot be empty");
         if (request.FileData == null || request.FileData.Length == 0)

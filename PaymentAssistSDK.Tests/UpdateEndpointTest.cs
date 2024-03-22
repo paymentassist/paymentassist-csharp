@@ -17,7 +17,7 @@ public class UpdateEndpointTest
     public async Task TestUpdate()
     {
         var request = new UpdateRequest{
-            ApplicationID = "aed3bd4e-c478-4d73-a6fa-3640a7155e4f",
+            ApplicationToken = "aed3bd4e-c478-4d73-a6fa-3640a7155e4f",
             Amount = 100000,
             OrderID = "neworderid",
             ExpiresIn = 600,
@@ -25,7 +25,7 @@ public class UpdateEndpointTest
 
         var response = await PASDK.Update(request);
 
-        Assert.Equal("aed3bd4e-c478-4d73-a6fa-3640a7155e4f", response.ApplicationID);
+        Assert.Equal("aed3bd4e-c478-4d73-a6fa-3640a7155e4f", response.ApplicationToken);
         Assert.Equal(100000, response.Amount);
         Assert.Equal("neworderid", response.OrderID);
         Assert.Equal(600, response.ExpiresIn);
@@ -37,9 +37,9 @@ public class UpdateEndpointTest
         var request = new UpdateRequest();
 
         var exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Update(request));
-        Assert.Equal("ApplicationID cannot be empty", exception.Message);
+        Assert.Equal("ApplicationToken cannot be empty", exception.Message);
 
-        request.ApplicationID = "test";
+        request.ApplicationToken = "test";
         await PASDK.Update(request);
     }
 }

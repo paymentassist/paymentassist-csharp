@@ -18,8 +18,8 @@ public class AccountEndpointTest
     {
         var response = await PASDK.Account();
 
-        Assert.Equal("Test Dealer", response.DisplayName);
-        Assert.Equal("Test Dealer", response.LegalName);
+        Assert.Equal("Test Merchant", response.DisplayName);
+        Assert.Equal("Test Merchant", response.LegalName);
         Assert.Equal(6, response.Plans[0].ID);
         Assert.Equal("3-Payment", response.Plans[0].Name);
         Assert.Equal(3, response.Plans[0].Instalments);

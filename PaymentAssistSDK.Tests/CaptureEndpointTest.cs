@@ -17,12 +17,12 @@ public class CaptureEndpointTest
     public async Task TestCapture()
     {
         var request = new CaptureRequest{
-            ApplicationID = "aed3bd4e-c478-4d73-a6fa-3640a7155e4f",
+            ApplicationToken = "aed3bd4e-c478-4d73-a6fa-3640a7155e4f",
         };
 
         var response = await PASDK.Capture(request);
 
-        Assert.Equal("aed3bd4e-c478-4d73-a6fa-3640a7155e4f", response.ApplicationID);
+        Assert.Equal("aed3bd4e-c478-4d73-a6fa-3640a7155e4f", response.ApplicationToken);
         Assert.Equal("completed", response.Status);
         Assert.True(response.DepositCaptured);
         Assert.Null(response.DepositCaptureFailureReason);
@@ -34,9 +34,9 @@ public class CaptureEndpointTest
         var request = new CaptureRequest();
 
         var exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Capture(request));
-        Assert.Equal("ApplicationID cannot be empty", exception.Message);
+        Assert.Equal("ApplicationToken cannot be empty", exception.Message);
 
-        request.ApplicationID = "test";
+        request.ApplicationToken = "test";
         await PASDK.Capture(request);
     }
 }

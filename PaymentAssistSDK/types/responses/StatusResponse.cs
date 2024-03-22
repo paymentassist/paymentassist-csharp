@@ -11,7 +11,7 @@ public class StatusResponse
     /// The ID (token) of this application.
     /// </summary>
     [JsonPropertyName("token")]
-    public string ApplicationID { get; set; } = "";
+    public string ApplicationToken { get; set; } = "";
 
     /// <summary>
     /// The status of this application.
@@ -32,13 +32,13 @@ public class StatusResponse
     public DateTime ExpiresAt { get; set; }
 
     /// <summary>
-    /// Payment Assist's internal reference code for this application. This might be empty as an internal reference is not generated as soon as the application is started.
+    /// Payment Assist's reference for this application. This may be empty as a reference is not generated until the finance facility or payment is successfully created (once an application moves to a "completed" status).
     /// </summary>
     [JsonPropertyName("pa_ref")]
     public string PaymentAssistReference { get; set; } = "";
 
     /// <summary>
-    /// Whether an invoice needs to be uploaded for this application before payment can be made to the dealer.
+    /// Whether an invoice needs to be uploaded for this application before funds will be released to the merchant.
     /// </summary>
     [JsonPropertyName("requires_invoice")]
     public bool RequriesInvoice { get; set; }

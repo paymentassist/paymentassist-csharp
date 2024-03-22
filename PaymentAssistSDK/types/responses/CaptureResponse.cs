@@ -12,7 +12,7 @@ public class CaptureResponse
     /// The ID (token) of this application.
     /// </summary>
     [JsonPropertyName("token")]
-    public string ApplicationID { get; set; } = "";
+    public string ApplicationToken { get; set; } = "";
 
     /// <summary>
     /// The status of this application after the application was captured.

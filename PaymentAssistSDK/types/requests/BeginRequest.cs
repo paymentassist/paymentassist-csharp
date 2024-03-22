@@ -109,9 +109,9 @@ public struct BeginRequest
     public int? PlanID;
 
     /// <summary>
-    /// The vehicle's licence plate number, where relevant.
+    /// The vehicle's registration plate, where relevant.
     /// </summary>
-    public string? VehicleLicencePlate;
+    public string? VehicleRegistrationPlate;
 
     /// <summary>
     /// A description of the services or goods being sold.

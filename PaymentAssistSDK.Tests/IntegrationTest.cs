@@ -28,16 +28,16 @@ public class IntegrationTest
         
         var beginResponse = await BeginAsync();
 
-        await StatusAsync(beginResponse.ApplicationID);
-        await UpdateAsync(beginResponse.ApplicationID);
-        await CaptureAsync(beginResponse.ApplicationID);
-        await InvoiceAsync(beginResponse.ApplicationID);
+        await StatusAsync(beginResponse.ApplicationToken);
+        await UpdateAsync(beginResponse.ApplicationToken);
+        await CaptureAsync(beginResponse.ApplicationToken);
+        await InvoiceAsync(beginResponse.ApplicationToken);
     }
 
-    private async Task StatusAsync(string applicationID)
+    private async Task StatusAsync(string token)
     {
         var request = new StatusRequest{
-            ApplicationID = applicationID,
+            ApplicationToken = token,
         };
 
         var response = await PASDK.Status(request);
@@ -45,17 +45,17 @@ public class IntegrationTest
         Assert.Equal(100000, response.Amount);
         Assert.True(response.ExpiresAt > DateTime.Now);
         Assert.True(response.ExpiresAt < DateTime.Now.AddHours(25));
-        Assert.Equal(applicationID, response.ApplicationID);
+        Assert.Equal(token, response.ApplicationToken);
         Assert.False(response.HasInvoice);
         Assert.False(response.RequriesInvoice);
         Assert.Equal("pending", response.Status);
     }
 
-    private async Task UpdateAsync(string applicationID)
+    private async Task UpdateAsync(string token)
     {
         // Test only updating some fields.
         var request = new UpdateRequest{
-            ApplicationID = applicationID,
+            ApplicationToken = token,
             Amount = 80000,
         };
 
@@ -68,7 +68,7 @@ public class IntegrationTest
         // Test updating most fields. We can't easily test updating order ID
         // because that requires a completed application.
         request = new UpdateRequest{
-            ApplicationID = applicationID,
+            ApplicationToken = token,
             Amount = 70000,
             ExpiresIn = 60 * 10,
         };
@@ -80,10 +80,10 @@ public class IntegrationTest
         Assert.Null(response.OrderID);
     }
 
-    private async Task CaptureAsync(string applicationID)
+    private async Task CaptureAsync(string token)
     {
         var request = new CaptureRequest{
-            ApplicationID = applicationID,
+            ApplicationToken = token,
         };
 
         // This is the closest we can get to testing it because only a completed application
@@ -92,10 +92,10 @@ public class IntegrationTest
         Assert.Contains("Application is not awaiting capture", exception.Message);
     }
 
-    private async Task InvoiceAsync(string applicationID)
+    private async Task InvoiceAsync(string token)
     {
         var request = new InvoiceRequest{
-            ApplicationID = applicationID,
+            ApplicationToken = token,
             FileType = "txt",
             FileData = new byte[] { 0x01 },
         };
@@ -119,7 +119,7 @@ public class IntegrationTest
 
         var response = await PASDK.Begin(request);
 
-        Assert.Equal(36, response.ApplicationID.Length);
+        Assert.Equal(36, response.ApplicationToken.Length);
         Assert.True(response.ContinuationURL.Length > 10);
 
     	return response;

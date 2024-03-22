@@ -30,7 +30,7 @@ internal static class BeginEndpoint
             "plan_id=" + request.PlanID,
             "postcode=" + request.CustomerPostcode,
             "qr_code=" + request.ReturnQRCode,
-            "reg_no=" + request.VehicleLicencePlate,
+            "reg_no=" + request.VehicleRegistrationPlate,
             "s_name=" + request.CustomerLastName,
             "send_email=" + request.SendEmail,
             "send_sms=" + request.SendSMS,

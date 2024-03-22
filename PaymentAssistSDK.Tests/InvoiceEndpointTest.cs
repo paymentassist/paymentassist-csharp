@@ -17,14 +17,14 @@ public class InvoiceEndpointTest
     public async Task TestInvoice()
     {
         var request = new InvoiceRequest{
-            ApplicationID = "aed3bd4e-c478-4d73-a6fa-3640a7155e4f",
+            ApplicationToken = "aed3bd4e-c478-4d73-a6fa-3640a7155e4f",
             FileType = "txt",
             FileData = new byte[] { 0x01 },
         };
 
         var response = await PASDK.Invoice(request);
 
-        Assert.Equal("aed3bd4e-c478-4d73-a6fa-3640a7155e4f", response.ApplicationID);
+        Assert.Equal("aed3bd4e-c478-4d73-a6fa-3640a7155e4f", response.ApplicationToken);
         Assert.Equal("success", response.UploadStatus);
     }
 
@@ -34,9 +34,9 @@ public class InvoiceEndpointTest
         var request = new InvoiceRequest();
 
         var exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Invoice(request));
-        Assert.Equal("ApplicationID cannot be empty", exception.Message);
+        Assert.Equal("ApplicationToken cannot be empty", exception.Message);
 
-        request.ApplicationID = "test";
+        request.ApplicationToken = "test";
         exception = await Assert.ThrowsAsync<ArgumentException>(() => PASDK.Invoice(request));
         Assert.Equal("FileType cannot be empty", exception.Message);
 

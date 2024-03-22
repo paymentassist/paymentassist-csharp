@@ -11,7 +11,7 @@ internal static class UpdateEndpoint
             "amount=" + request.Amount,
             "expiry=" + request.ExpiresIn,
             "order_id=" + request.OrderID,
-            "token=" + request.ApplicationID
+            "token=" + request.ApplicationToken
         };
 
         requestParams = RequestHelpers.RemoveEmptyParams(requestParams);
@@ -25,7 +25,7 @@ internal static class UpdateEndpoint
 
     private static void Validate(UpdateRequest request)
     {
-        if (string.IsNullOrEmpty(request.ApplicationID))
-            throw new ArgumentException("ApplicationID cannot be empty");
+        if (string.IsNullOrEmpty(request.ApplicationToken))
+            throw new ArgumentException("ApplicationToken cannot be empty");
     }
 }

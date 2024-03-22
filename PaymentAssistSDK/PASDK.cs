@@ -16,7 +16,7 @@ public static class PASDK
     }
 
     /// <summary>
-    /// Returns information about this dealer's account, including what plan types are available.
+    /// Returns information about this merchant's account, including what plan types are available.
     /// </summary>
     public static Task<AccountResponse> Account()
     {
@@ -49,7 +49,7 @@ public static class PASDK
 
     /// <summary>
     /// Generates a repayment schedule for a hypothetical application.
-    /// Accepts a transaction amount and an optional plan ID and term length,
+    /// Accepts a transaction amount and an optional plan ID,
     /// returning a full repayment schedule including amounts and dates.
     /// </summary>
     public static Task<PlanResponse> Plan(PlanRequest request)
@@ -61,7 +61,7 @@ public static class PASDK
     /// Checks the eligibity of a customer in advance.
     /// Success simply means that the customer has passed our internal checks. They
     /// will still need to have funds available to cover any deposit payment for
-    /// the application to be successful.
+    /// the application to be successful and pass a credit check (if required).
     /// </summary>
     public static Task<PreapprovalResponse> Preapproval(PreapprovalRequest request)
     {

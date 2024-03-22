@@ -3,9 +3,9 @@ namespace PaymentAssistSDK;
 public struct UpdateRequest
 {
     /// <summary>
-    /// The application ID (token) you received when calling the "begin" endpoint.
+    /// The token you received when calling the "begin" endpoint.
     /// </summary>
-    public string ApplicationID;
+    public string ApplicationToken;
 
     /// <summary>
     /// Your new order ID. You can only change this if the application's status is "completed".

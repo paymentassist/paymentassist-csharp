@@ -8,7 +8,7 @@ internal static class CaptureEndpoint
 
         var requestParams = new List<string>
         {
-            "token=" + request.ApplicationID,
+            "token=" + request.ApplicationToken,
         };
 
         requestParams = RequestHelpers.RemoveEmptyParams(requestParams);
@@ -22,7 +22,7 @@ internal static class CaptureEndpoint
 
     private static void Validate(CaptureRequest request)
     {
-        if (string.IsNullOrEmpty(request.ApplicationID))
-            throw new ArgumentException("ApplicationID cannot be empty");
+        if (string.IsNullOrEmpty(request.ApplicationToken))
+            throw new ArgumentException("ApplicationToken cannot be empty");
     }
 }

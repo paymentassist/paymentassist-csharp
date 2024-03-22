@@ -11,7 +11,7 @@ public class UpdateResponse
     /// The ID (token) of this application.
     /// </summary>
     [JsonPropertyName("token")]
-    public string ApplicationID { get; set; } = ""; 
+    public string ApplicationToken { get; set; } = ""; 
 
     /// <summary>
     /// The new order ID you requested, if any.

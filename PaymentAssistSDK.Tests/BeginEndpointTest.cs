@@ -27,7 +27,7 @@ public class BeginEndpointTest
 
         var response = await PASDK.Begin(request);
 
-        Assert.Equal("0138ef43-f703-41cb-8f08-f36f41b47560", response.ApplicationID);
+        Assert.Equal("0138ef43-f703-41cb-8f08-f36f41b47560", response.ApplicationToken);
         Assert.Contains("https://", response.ContinuationURL);
     }
 

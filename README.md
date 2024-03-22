@@ -39,7 +39,7 @@ Example:
 ```
 var accountResponse = await PASDK.Account();
 
-// Print the dealer's display name.
+// Print the merchant's display name.
 Console.WriteLine(accountResponse.DisplayName);
 ```
 
@@ -47,8 +47,8 @@ The following actions are available:
 
 | Action | Description |
 |--------|-------------|
-| __AccountRequest__ | Returns information about the dealer's account. |
-| __PlanRequest__ | Returns what the repayments would look like under a hypothetical repayment plan. |
+| __AccountRequest__ | Returns information about the merchant's account including available plans and their configuration. |
+| __PlanRequest__ | Returns what the repayments would look like under a hypothetical repayment plan beginning today. |
 | __PreapprovalRequest__ | Checks whether a customer would pass the basic pre-approval checks. |
 | __BeginRequest__ | Begins an application. |
 | __StatusRequest__ | Returns information about an ongoing application. |
