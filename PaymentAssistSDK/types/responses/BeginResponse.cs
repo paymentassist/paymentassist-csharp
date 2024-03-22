@@ -8,7 +8,7 @@ namespace PaymentAssistSDK;
 public class BeginResponse
 {
     /// <summary>
-    /// The ID (AKA token) of the application that was created. You should save this for later use.
+    /// A token representing the application that was created. You should save this for later use.
     /// </summary>
     [JsonPropertyName("token")]
     public string ApplicationToken { get; set; } = "";

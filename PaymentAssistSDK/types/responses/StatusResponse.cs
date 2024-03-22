@@ -8,7 +8,7 @@ namespace PaymentAssistSDK;
 public class StatusResponse
 {
     /// <summary>
-    /// The ID (token) of this application.
+    /// The token representing this application.
     /// </summary>
     [JsonPropertyName("token")]
     public string ApplicationToken { get; set; } = "";
