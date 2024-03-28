@@ -43,13 +43,13 @@ public class Plan
     [JsonPropertyName("frequency")]
     public string Frequency { get; set; } = "";
 
-    /// <summary
+    /// <summary>
     /// The minimum amount allowed under this plan in pence, if any.
     /// </summary>
     [JsonPropertyName("min_amount")]
     public int? MinAmount { get; set; }
 
-    /// <summary
+    /// <summary>
     /// The maximum amount allowed under this plan in pence, if any.
     /// </summary>
     [JsonPropertyName("max_amount")]

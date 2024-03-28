@@ -1,5 +1,8 @@
 namespace PaymentAssistSDK;
 
+/// <summary>
+/// Contains the data for a request to the "preapproval" endpoint.
+/// </summary>
 public struct PreapprovalRequest
 {
     /// <summary>

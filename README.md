@@ -1,16 +1,14 @@
-# This SDK is undergoing testing and has not been released!
-
 # paymentassist-csharp
 
 The official C# SDK for the Payment Assist Merchant API.
 
 ## Dependencies
 
-.Net 6 and later
+.Net 6 and later.
 
 ## Installation
 
-???????????????????????
+Install the PaymentAssistSDK NuGet package: https://www.nuget.org/packages/PaymentAssistSDK/.
 
 ## Workflow
 
@@ -23,6 +21,10 @@ The full API reference can be found here: https://api-docs.payment-assist.co.uk/
 To use this SDK, first initialise it by calling `PASDK.Initialise(...)`, which takes your API credentials as well as the PaymentAssist API URL you want to make requests to.
 
 ```
+using PaymentAssistSDK;
+
+...
+
 PASDK.Initialise("my_api_key", "my_api_secret", "https://api.demo.payassi.st/");
 ```
 

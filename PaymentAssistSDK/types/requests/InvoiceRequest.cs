@@ -1,5 +1,8 @@
 namespace PaymentAssistSDK;
 
+/// <summary>
+/// Contains the data for a request to the "invoice" endpoint.
+/// </summary>
 public struct InvoiceRequest
 {
     /// <summary>
