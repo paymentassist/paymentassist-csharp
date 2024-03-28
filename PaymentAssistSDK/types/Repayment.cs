@@ -2,6 +2,9 @@ using System.Text.Json.Serialization;
 
 namespace PaymentAssistSDK;
 
+/// <summary>
+/// A repayment in a repayment plan.
+/// </summary>
 public struct Repayment
 {
     /// <summary>

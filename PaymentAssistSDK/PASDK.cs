@@ -1,5 +1,8 @@
 ﻿namespace PaymentAssistSDK;
 
+/// <summary>
+/// Contains methods for invoking the API.
+/// </summary>
 public static class PASDK
 {
     /// <summary>
