@@ -130,5 +130,4 @@ public struct BeginRequest
     /// The date of birth of the customer.
     /// </summary>
     public DateTime? DOB;
-
 }
