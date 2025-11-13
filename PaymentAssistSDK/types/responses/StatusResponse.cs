@@ -48,4 +48,10 @@ public class StatusResponse
     /// </summary>
     [JsonPropertyName("has_invoice")]
     public bool HasInvoice { get; set; }
+
+    /// <summary>
+    /// The time the customer last accessed the application.
+    /// </summary>
+    [JsonPropertyName("last_accessed_at")]
+    public DateTime LastAccessedAt { get; set; }
 }

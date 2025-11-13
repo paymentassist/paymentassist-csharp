@@ -45,6 +45,8 @@ public class IntegrationTest
         Assert.Equal(100000, response.Amount);
         Assert.True(response.ExpiresAt > DateTime.Now);
         Assert.True(response.ExpiresAt < DateTime.Now.AddHours(25));
+        Assert.True(response.LastAccessedAt <= DateTime.Now);
+        Assert.True(response.LastAccessedAt > DateTime.Now.AddHours(-1));
         Assert.Equal(token, response.ApplicationToken);
         Assert.False(response.HasInvoice);
         Assert.False(response.RequriesInvoice);
@@ -115,6 +117,7 @@ public class IntegrationTest
             CustomerAddress1 = "Test House",
             CustomerPostcode = "TEST TES",
             EnableAutoCapture = false,
+            DOB = new DateTime(2000, 12, 25)
         };
 
         var response = await PASDK.Begin(request);

@@ -26,6 +26,7 @@ public class StatusEndpointTest
         Assert.Equal("pending", response.Status);
         Assert.Equal(50000, response.Amount);
         Assert.Equal(new DateTime(2022, 5, 24, 19, 28, 6), response.ExpiresAt);
+        Assert.Equal(new DateTime(2022, 5, 20, 14, 15, 22), response.LastAccessedAt);
         Assert.True(response.HasInvoice);
         Assert.True(response.RequriesInvoice);
         Assert.Equal("testreference", response.PaymentAssistReference);

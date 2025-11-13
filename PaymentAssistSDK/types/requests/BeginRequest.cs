@@ -125,4 +125,9 @@ public struct BeginRequest
     /// The amount of time before the application expires, in seconds. This is 24 hours by default.
     /// </summary>
     public int? Expiry;
+
+    /// <summary>
+    /// The date of birth of the customer.
+    /// </summary>
+    public DateTime? DOB;
 }
