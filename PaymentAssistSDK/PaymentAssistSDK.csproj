@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <PackageId>PaymentAssistSDK</PackageId>
-    <Version>1.0.3</Version>
+    <Version>1.1.0</Version>
     <Authors>Payment Assist</Authors>
     <Company>Payment Assist Ltd</Company>
     <Product>PaymentAssistSDK</Product>
