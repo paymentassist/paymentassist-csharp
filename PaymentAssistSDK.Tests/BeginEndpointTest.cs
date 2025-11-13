@@ -23,6 +23,7 @@ public class BeginEndpointTest
             CustomerLastName = "Testington",
             CustomerAddress1 = "Test House",
             CustomerPostcode = "TEST TES",
+            DOB = new DateTime(2000, 12, 25)
         };
 
         var response = await PASDK.Begin(request);

@@ -21,6 +21,7 @@ internal static class BeginEndpoint
             "auto_capture=" + request.EnableAutoCapture,
             "county=" + request.CustomerCounty,
             "description=" + request.Description,
+            "dob=" + request.DOB?.ToString("yyyy-MM-dd"),
             "email=" + request.CustomerEmail,
             "expiry=" + request.Expiry,
             "f_name=" + request.CustomerFirstName,

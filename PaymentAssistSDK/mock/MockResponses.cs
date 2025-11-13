@@ -105,7 +105,8 @@ internal static class MockResponses
                         ""expires_at"": ""2022-05-24T19:28:06+01:00"",
                         ""pa_ref"": ""testreference"",
                         ""requires_invoice"": true,
-                        ""has_invoice"": true
+                        ""has_invoice"": true,
+                        ""last_accessed_at"": ""2022-05-20T14:15:22+01:00""
                     }
                 }");
             case "account":
